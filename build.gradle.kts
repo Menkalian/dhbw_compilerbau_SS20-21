@@ -9,6 +9,11 @@ tasks.withType(Test::class.java) {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+
+    reports {
+        xml.isEnabled = true
+        csv.isEnabled = true
+    }
 }
 
 tasks.check {
