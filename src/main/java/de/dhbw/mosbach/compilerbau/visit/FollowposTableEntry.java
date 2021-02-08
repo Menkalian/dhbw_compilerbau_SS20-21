@@ -1,4 +1,4 @@
-package de.dhbw.mosbach.compilerbau;
+package de.dhbw.mosbach.compilerbau.visit;
 
 import java.util.HashSet;
 import java.util.Objects;

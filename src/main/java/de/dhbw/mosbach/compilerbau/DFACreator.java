@@ -1,5 +1,8 @@
 package de.dhbw.mosbach.compilerbau;
 
+import de.dhbw.mosbach.compilerbau.dfa.DFAState;
+import de.dhbw.mosbach.compilerbau.visit.FollowposTableEntry;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

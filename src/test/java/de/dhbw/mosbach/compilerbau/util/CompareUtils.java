@@ -1,6 +1,6 @@
 package de.dhbw.mosbach.compilerbau.util;
 
-import de.dhbw.mosbach.compilerbau.Visitable;
+import de.dhbw.mosbach.compilerbau.visit.Visitable;
 import de.dhbw.mosbach.compilerbau.ast.BinOpNode;
 import de.dhbw.mosbach.compilerbau.ast.OperandNode;
 import de.dhbw.mosbach.compilerbau.ast.UnaryOpNode;

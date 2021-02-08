@@ -1,4 +1,4 @@
-package de.dhbw.mosbach.compilerbau;
+package de.dhbw.mosbach.compilerbau.dfa;
 
 import java.util.Objects;
 import java.util.Set;

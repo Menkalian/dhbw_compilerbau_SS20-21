@@ -3,6 +3,7 @@ package de.dhbw.mosbach.compilerbau;
 import de.dhbw.mosbach.compilerbau.ast.BinOpNode;
 import de.dhbw.mosbach.compilerbau.ast.OperandNode;
 import de.dhbw.mosbach.compilerbau.ast.UnaryOpNode;
+import de.dhbw.mosbach.compilerbau.visit.Visitor;
 
 public class FollowPosTableGenerator implements Visitor {
     @Override

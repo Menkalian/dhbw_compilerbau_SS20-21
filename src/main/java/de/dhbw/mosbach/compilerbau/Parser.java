@@ -1,5 +1,7 @@
 package de.dhbw.mosbach.compilerbau;
 
+import de.dhbw.mosbach.compilerbau.visit.Visitable;
+
 public class Parser {
     private int position;
     private final String eingabe;
@@ -14,10 +16,9 @@ public class Parser {
     // TODO: 08.02.2021 pro Nichtterminal eine Methode!
 
     /**
-     * Nichtterminal Start
-     * <p>
-     * i) Nur diese Methode ist oeffentlich!!
-     * ii) Nur in dieser Methode auf Eingabeende ueberpruefen !!!
+     * Nichtterminal Start<br>
+     * - Nur diese Methode ist oeffentlich!!<br>
+     * - Nur in dieser Methode auf Eingabeende ueberpruefen !!!
      */
     public Visitable start (Visitable parameter) {
         // TODO: 08.02.2021 (...)
@@ -47,8 +48,8 @@ public class Parser {
     }
 
     /**
-     * 1. wird benoetigt bei der Regel Start -> '(' RegExp ')''#'
-     * 2. wird benoetigt bei der Regel Start -> '#'
+     * 1. wird benoetigt bei der Regel Start -> '(' RegExp ')''#'<br>
+     * 2. wird benoetigt bei der Regel Start -> '#'<br>
      * 3. wird sonst bei keiner anderen Regel benoetigt
      */
     private void assertEndOfInput () {

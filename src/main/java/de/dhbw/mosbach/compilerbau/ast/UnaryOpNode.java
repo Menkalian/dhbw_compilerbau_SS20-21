@@ -1,7 +1,7 @@
 package de.dhbw.mosbach.compilerbau.ast;
 
-import de.dhbw.mosbach.compilerbau.Visitable;
-import de.dhbw.mosbach.compilerbau.Visitor;
+import de.dhbw.mosbach.compilerbau.visit.Visitable;
+import de.dhbw.mosbach.compilerbau.visit.Visitor;
 
 public class UnaryOpNode extends SyntaxNode implements Visitable {
     public String operator;

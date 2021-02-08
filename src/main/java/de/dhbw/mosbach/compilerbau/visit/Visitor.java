@@ -1,4 +1,4 @@
-package de.dhbw.mosbach.compilerbau;
+package de.dhbw.mosbach.compilerbau.visit;
 
 import de.dhbw.mosbach.compilerbau.ast.BinOpNode;
 import de.dhbw.mosbach.compilerbau.ast.OperandNode;
