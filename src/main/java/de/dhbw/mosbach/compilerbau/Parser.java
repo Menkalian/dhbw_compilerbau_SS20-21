@@ -55,6 +55,7 @@ public class Parser {
     private Visitable regExpEnde (Visitable parameter) {
         char inputChar = eingabe.charAt(position);
         if (inputChar == '|') {
+            match('|');
             Visitable expandedTree = new BinOpNode("|", parameter, term(null));
             return regExpEnde(expandedTree);
         } else if (inputChar == ')') {
@@ -123,7 +124,10 @@ public class Parser {
         if (Character.isLetterOrDigit(inputChar)) {
             return alphanum(null);
         } else if (inputChar == '(') {
-            return regExp(null);
+            match('(');
+            Visitable subTree = regExp(null);
+            match(')');
+            return subTree;
         } else {
             throw new RuntimeException("Syntax error!");
         }
