@@ -13,9 +13,13 @@ import java.util.Set;
 
 @SuppressWarnings({"unused", "SameParameterValue"})
 public class FollowPosTableGenerator implements Visitor {
-    private Set<FollowposTableEntry> followPosTable;
+    private Set<FollowposTableEntry> followPosTable = new HashSet<>();
 
     public FollowPosTableGenerator() {
+    }
+
+    public Set<FollowposTableEntry> getFollowPosTable() {
+        return this.followPosTable;
     }
 
     public void generate(Visitable root) {
