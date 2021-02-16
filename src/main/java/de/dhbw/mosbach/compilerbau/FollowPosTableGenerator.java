@@ -8,93 +8,62 @@ import de.dhbw.mosbach.compilerbau.visit.FollowposTableEntry;
 import de.dhbw.mosbach.compilerbau.visit.Visitable;
 import de.dhbw.mosbach.compilerbau.visit.Visitor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-@SuppressWarnings({"unused", "SameParameterValue"})
 public class FollowPosTableGenerator implements Visitor {
-    private Set<FollowposTableEntry> followPosTable = new HashSet<>();
+    private final SortedMap<Integer, FollowposTableEntry> followposTableEntries = new TreeMap<>();
 
     public FollowPosTableGenerator() {
     }
 
-    public Set<FollowposTableEntry> getFollowPosTable() {
-        return this.followPosTable;
+    public SortedMap<Integer, FollowposTableEntry> getFollowposTableEntries() {
+        return followposTableEntries;
     }
 
     public void generate(Visitable root) {
-        this.followPosTable = new HashSet<>();
+        // clear table entries if they have been generated before (when table generator is used for multiple syntax trees)
+        if (this.followposTableEntries.size() > 0) {
+            this.followposTableEntries.clear();
+        }
+
         DepthFirstIterator.traverse(root, this);
     }
 
     @Override
     public void visit(OperandNode node) {
-        this.followPosTable.add(new FollowposTableEntry(node.position, node.symbol));
-        // no need to initialize followpos Set because its default is an empty set.
+        this.followposTableEntries.put(node.position, new FollowposTableEntry(node.position, node.symbol));
     }
 
     @Override
     public void visit(BinOpNode node) {
-        if (node.operator.equals("*") || node.operator.equals("+")) {
-            for (int i : node.lastpos) {
-                FollowposTableEntry entryAtPositionI = this.getEntryByPosition(i);
-                if (entryAtPositionI == null) {
-                    throw new RuntimeException("Could not find FollowposTableEntry with position " + i);
-                }
-
-                entryAtPositionI.followpos.addAll(node.firstpos);
-            }
-        } else if (node.operator.equals("°")) {
-            // Konkatenation
+        // only | (alternative) and ° (konkatenation) possible
+        // | (alternative) is not relevant
+        if (node.operator.equals("°")) {
             if (!(node.left instanceof SyntaxNode) || !(node.right instanceof SyntaxNode)) {
-                throw new RuntimeException("Node is not a SyntaxNode");
+                throw new RuntimeException("Node is not a SyntaxNode.");
             }
 
             for (int i : ((SyntaxNode) node.left).lastpos) {
-                FollowposTableEntry entryAtPositionI = this.getEntryByPosition(i);
-                if (entryAtPositionI == null) {
-                    throw new RuntimeException("Could not find FollowposTableEntry with position " + i);
-                }
-
-                entryAtPositionI.followpos.addAll(((SyntaxNode) node.right).firstpos);
+                this.followposTableEntries.get(i).followpos.addAll(((SyntaxNode) node.right).firstpos);
             }
         }
     }
 
     @Override
     public void visit(UnaryOpNode node) {
-        if (!(node.subNode instanceof SyntaxNode)) {
-            throw new RuntimeException("Sub node is not a SyntaxNode");
-        }
-
+        // only * (kleene operator), + (positive operator) and ? (option) possible.
+        // ? (option) is not relevant
         if (node.operator.equals("*") || node.operator.equals("+")) {
-            for (int i : node.lastpos) {
-                FollowposTableEntry entryAtPositionI = this.getEntryByPosition(i);
-                if (entryAtPositionI == null) {
-                    throw new RuntimeException("Could not find FollowposTableEntry with position " + i);
-                }
-
-                entryAtPositionI.followpos.addAll(((SyntaxNode) node.subNode).firstpos);
+            if (!(node.subNode instanceof SyntaxNode)) {
+                throw new RuntimeException("Sub node is not a SyntaxNode.");
             }
-        } else if (node.operator.equals("°")) {
-            // Konkatenation
 
-            for (int i : ((SyntaxNode) node.subNode).lastpos) {
-                FollowposTableEntry entryAtPositionI = this.getEntryByPosition(i);
-                if (entryAtPositionI == null) {
-                    throw new RuntimeException("Could not find FollowposTableEntry with position " + i);
-                }
+            SyntaxNode subNode = (SyntaxNode) node.subNode;
 
-                entryAtPositionI.followpos.addAll(((SyntaxNode) node.subNode).firstpos);
+            for (int i : subNode.lastpos) {
+                this.followposTableEntries.get(i).followpos.addAll(subNode.firstpos);
             }
         }
-    }
-
-    public FollowposTableEntry getEntryByPosition(int pos) {
-        for (FollowposTableEntry entry : this.followPosTable) {
-            if (entry.position == pos) return entry;
-        }
-
-        return null;
     }
 }
