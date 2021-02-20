@@ -24,28 +24,6 @@ public class FollowPosTableGeneratorTest {
         this.followposTableEntries = generator.getFollowposTableEntries();
     }
 
-//    @Test
-//    public void test01_createsNewEntryWhenVisitingOperandNode() {
-//        OperandNode node = new OperandNode("a");
-//        node.position = 1;
-//        node.firstpos.add(1);
-//        node.lastpos.add(1);
-//        node.nullable = false;
-//
-//        this.generator.visit(node);
-//        Assertions.assertEquals(1, this.followposTableEntries.size());
-//
-//        FollowposTableEntry expectedEntry = new FollowposTableEntry(1, "a");
-//
-//        FollowposTableEntry newEntry = this.followposTableEntries.get(1);
-//
-//        Assertions.assertNotNull(newEntry);
-//        Assertions.assertEquals(expectedEntry, newEntry);
-//
-//        // no need to explicitly test if followpos Set is empty because FollowposTableEntry of expectedEntry is inited empty.
-//    }
-
-
     @Test
     public void test01_createsCorrectFollowPosTableEntriesExampleVorlesung() {
         // input: "((a|b)*abb)#" , Vorlesungsunterlagen Kapitel 3, Seite 78
