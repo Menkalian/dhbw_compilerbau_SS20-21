@@ -14,7 +14,7 @@ public class SyntaxTreeEvaluator implements Visitor {
         this.counter = 1;
     }
 
-    public void placeholder(Visitable root){
+    public void start(Visitable root){
         DepthFirstIterator.traverse(root,this);
     }
 
@@ -33,9 +33,6 @@ public class SyntaxTreeEvaluator implements Visitor {
             node.firstpos.add(null);
             node.lastpos.add(null);
         }
-
-
-        //System.out.println(node.symbol +" : "+ node.firstpos + " ," + node.lastpos);
 
     }
 
@@ -72,8 +69,6 @@ public class SyntaxTreeEvaluator implements Visitor {
                 node.lastpos.addAll(right.lastpos);
             }
 
-            //System.out.println(node.operator +" : "+ node.firstpos + " ," + node.lastpos);
-
         }
 
         if(node.operator.equals("|")){
@@ -92,14 +87,11 @@ public class SyntaxTreeEvaluator implements Visitor {
             node.lastpos.addAll(left.lastpos);
             node.lastpos.addAll(right.lastpos);
 
-            //System.out.println(node.operator +" : "+ node.firstpos + " ," + node.lastpos);
-
         }
     }
 
     @Override
     public void visit (UnaryOpNode node) {
-        // TODO: 08.02.2021 (...)
 
         SyntaxNode sub = (SyntaxNode) node.subNode;
 
