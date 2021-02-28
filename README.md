@@ -23,6 +23,15 @@ Analog zum Drachenbuch (Seiten 209 bis 216) soll ein Verfahren implementiert wer
 
 Eine **Zip-Datei** (**Quelldateien** und **Unit-Tests**) bis zum **05.03.2021** über **Moodle**
 
+## Aufgabenverteilung
+
+|       Was        |   Person       |
+|------------------|----------------|
+| Top-Down-Parser  |  Kilian Krampf |
+| 1. Visitor       |  Lucas Winter  |
+| 2. Visitor       |  Lars Rickert  |
+| DEA-Erzeuger     |  Hannes Lüer   |
+
 ## Projektstruktur
 
 Dieses Projekt nutzt Gradle als Buildtool und für automatisiertes Testen. Das Projekt ist auf [Github](https://github.com/Menkalian/dhbw_compilerbau_SS20-21) einsehbar. Dort sind auch die Ergebnisse des automatisierten Build/Test-Verfahrens zu sehen (und auch diese Markdown-Datei vernünftig formatiert).
